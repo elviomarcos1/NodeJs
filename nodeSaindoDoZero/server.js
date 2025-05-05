@@ -1,6 +1,6 @@
 import { fastify } from 'fastify'
 import { DatabaseMemory } from './database-memory.js'
-import { createLogger } from 'vite'
+
 const server = fastify()
 
 const database = new DatabaseMemory()
