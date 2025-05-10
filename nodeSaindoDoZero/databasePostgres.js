@@ -8,7 +8,7 @@ export class DatabasePostgres {
         let videos 
 
         if (search) {
-            videos = await sql`select * from videos where title ilike "%${search}%"`
+            videos = await sql`select * from videos where title ilike ${'%'+ search + '%'}`
         }
         else {
             videos = await sql`select * from videos`
@@ -25,10 +25,12 @@ export class DatabasePostgres {
     }
 
     async update(id, video) {
+        const {title, description, duration} = video
         
+        await sql`update videos set title = ${title}, description = ${description}, duration = ${duration} WHERE id = ${id}`
     }
 
     async delete(id) {
-        
+        await sql`DELETE FROM videos WHERE id = ${id}`
     }
 }
